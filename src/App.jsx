@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useRef } from "react";
+import "./App.css";
+const App = () => {
+  const imageRef = useRef();
 
-function App() {
-  const [count, setCount] = useState(0)
+  const swapImage = () => {
+    const currentSrc = imageRef.current.getAttribute("src");
+    const newSrc =
+      currentSrc ===
+      "https://i.pinimg.com/736x/45/18/1e/45181e42e7a93334d8bce368b7df8e56.jpg"
+        ? "https://i.pinimg.com/736x/e3/3e/8d/e33e8d69cea8a77fb29104dc8e828674.jpg"
+        : "https://i.pinimg.com/736x/45/18/1e/45181e42e7a93334d8bce368b7df8e56.jpg";
+    imageRef.current.setAttribute("src", newSrc);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container">
+      <h1 className="title">Image Swap Feature</h1>
+      <img
+        ref={imageRef}
+        className="image"
+        src="https://i.pinimg.com/736x/45/18/1e/45181e42e7a93334d8bce368b7df8e56.jpg"
+        alt="Placeholder"
+      />
+      <button className="button" onClick={swapImage}>
+        Swap Image
+      </button>
+    </div>
+  );
+};
 
-export default App
+export default App;
